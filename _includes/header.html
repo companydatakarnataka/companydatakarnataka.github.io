@@ -1,10 +1,49 @@
 <header>
     <div class="header-content">
         <div class="header-content-inner">
-            <h1>Your Favorite Source of Free Bootstrap Themes</h1>
+            <!-- <h1>Your Favorite Source of Free Bootstrap Themes</h1>
             <hr>
             <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a> -->
+
+
+    <meta charset="utf-8">
+    
+    <style>
+      path {
+        stroke: white;
+        stroke-width: 0.5px;
+        fill: black;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var width = 900;
+      var height = 600;
+
+      var projection = d3.geo.mercator();
+
+      var svg = d3.select("body").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+      var path = d3.geo.path()
+          .projection(projection);
+      var g = svg.append("g");
+
+      d3.json("world-110m2.json", function(error, topology) {
+          g.selectAll("path")
+            .data(topojson.object(topology, topology.objects.countries)
+                .geometries)
+          .enter()
+            .append("path")
+            .attr("d", path)
+      });
+    </script>
+
+
         </div>
     </div>
 </header>
